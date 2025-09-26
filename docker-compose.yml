@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  datahub-mcp:
+    build: .
+    image: datahub-mcp:latest
+    entrypoint: ["uv", "run", "mcp-server-datahub"]
+    stdin_open: true
+    tty: true
+
+  mcp-proxy:
+    image: ghcr.io/modelcontextprotocol/stdio-to-sse-proxy:latest
+    depends_on: [datahub-mcp]
+    ports:
+      - "3001:3001"
+    environment:
+      # Command to spawn your MCP server inside the container
+      MCP_COMMAND: "uv"
+      MCP_ARGS: "run mcp-server-datahub"
+      MCP_WORKDIR: "/app"
+     
+    volumes:
+      - ./:/app:ro
