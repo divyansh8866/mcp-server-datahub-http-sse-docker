@@ -21,15 +21,29 @@ Check out the [demo video](https://youtu.be/VXRvHIZ3Eww?t=1878), done in collabo
 See instructions in the [DataHub MCP server docs](https://docs.datahub.com/docs/features/feature-guides/mcp).
 
 ### Docker Deployment 
-# Build
+#### Build
+```cmd
 docker build -t datahub-mcp:latest .
+```
 
-# Run (inject your DataHub creds/URL)
+#### Run (inject your DataHub creds/URL)
+```cmd
 docker run --rm -p 8080:8080 \
   -e DATAHUB_GMS_URL="http://ip:port" \
   -e DATAHUB_GMS_TOKEN="your tocken here" \
   datahub-mcp:latest
-
+```
+## Json file to add to Cursor and other AI
+```json
+{
+  "mcpServers": {
+    "datahub": {
+      "type": "http",
+      "url": "http://localhost:8080/mcp"
+    }
+  }
+}
+```
 ## Developing
 
 See [DEVELOPING.md](DEVELOPING.md).
