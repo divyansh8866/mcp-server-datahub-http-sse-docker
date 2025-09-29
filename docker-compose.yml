@@ -12,7 +12,7 @@ services:
     image: ghcr.io/modelcontextprotocol/stdio-to-sse-proxy:latest
     depends_on: [datahub-mcp]
     ports:
-      - "3001:3001"
+      - "8000:8000"
     environment:
       # Command to spawn your MCP server inside the container
       MCP_COMMAND: "uv"

@@ -22,6 +22,15 @@ logging.basicConfig(level=logging.INFO)
     default="stdio",
 )
 @click.option(
+    "--host",
+    default="0.0.0.0",
+)
+@click.option(
+    "--port",
+    type=int,
+    default=8080,
+)
+@click.option(
     "--debug",
     is_flag=True,
     default=False,
@@ -29,7 +38,12 @@ logging.basicConfig(level=logging.INFO)
 @telemetry.with_telemetry(
     capture_kwargs=["transport"],
 )
-def main(transport: Literal["stdio", "sse", "http"], debug: bool) -> None:
+def main(
+    transport: Literal["stdio", "sse", "http"],
+    host: str,
+    port: int,
+    debug: bool,
+) -> None:
     client = DataHubClient.from_env(
         client_mode=ClientMode.SDK,
         datahub_component=f"mcp-server-datahub/{__version__}",
@@ -42,7 +56,20 @@ def main(transport: Literal["stdio", "sse", "http"], debug: bool) -> None:
 
     with with_datahub_client(client):
         if transport == "http":
-            mcp.run(transport=transport, show_banner=False, stateless_http=True)
+            mcp.run(
+                transport=transport,
+                host=host,
+                port=port,
+                show_banner=False,
+                stateless_http=True,
+            )
+        elif transport == "sse":
+            mcp.run(
+                transport=transport,
+                host=host,
+                port=port,
+                show_banner=False,
+            )
         else:
             mcp.run(transport=transport, show_banner=False)
 

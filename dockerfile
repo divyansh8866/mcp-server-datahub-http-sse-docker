@@ -20,7 +20,7 @@ ENV DATAHUB_GMS_URL=""
 ENV DATAHUB_GMS_TOKEN=""
 
 # Expose HTTP (default) and optional SSE port
-EXPOSE 8080 3001
+EXPOSE 8000
 
 # Default: HTTP (stateless) for max compatibility/simplicity
-ENTRYPOINT ["uv", "run", "mcp-server-datahub", "--transport", "http", "--host", "0.0.0.0", "--port", "8080", "--stateless-http"]
+ENTRYPOINT ["uv", "run", "mcp-server-datahub", "--transport", "http"]

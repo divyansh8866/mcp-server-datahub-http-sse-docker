@@ -22,7 +22,7 @@ logger = logging.getLogger("mcp-server-datahub")
 @click.option(
     "--transport",
     type=click.Choice(["stdio", "sse", "http"]),
-    default="stdio",
+    default="http",
     show_default=True,
     help="Transport to use for the MCP server.",
 )
@@ -35,7 +35,7 @@ logger = logging.getLogger("mcp-server-datahub")
 @click.option(
     "--port",
     type=int,
-    default=3001,
+    default=8080,
     show_default=True,
     help="Port to bind (applies to http/sse).",
 )

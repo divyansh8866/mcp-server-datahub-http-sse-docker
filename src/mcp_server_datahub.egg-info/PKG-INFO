@@ -1,3 +1,20 @@
+Metadata-Version: 2.4
+Name: mcp-server-datahub
+Version: 0.0.1.dev102
+Summary: A Model Context Protocol (MCP) server for DataHub
+License-Expression: Apache-2.0
+Project-URL: Source, https://github.com/acryldata/mcp-server-datahub
+Project-URL: Documentation, https://docs.datahub.com/docs/features/feature-guides/mcp
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: acryl-datahub==1.2.0.2
+Requires-Dist: asyncer>=0.0.8
+Requires-Dist: fastmcp==2.10.5
+Requires-Dist: jmespath~=1.0.1
+Requires-Dist: loguru
+Dynamic: license-file
+
 # mcp-server-datahub
 
 A [Model Context Protocol](https://modelcontextprotocol.io/) server implementation for [DataHub](https://datahubproject.io/).
@@ -29,8 +46,8 @@ docker build -t datahub-mcp:latest .
 #### Run (inject your DataHub creds/URL)
 ```cmd
 docker run --rm -p 8080:8080 \
-  -e DATAHUB_GMS_URL="xxx" \
-  -e DATAHUB_GMS_TOKEN="xxx" \
+  -e DATAHUB_GMS_URL="http://ip:port" \
+  -e DATAHUB_GMS_TOKEN="your tocken here" \
   datahub-mcp:latest
 ```
 ## Json file to add to Cursor and other AI
